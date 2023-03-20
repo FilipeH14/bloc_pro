@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
             children: [
               ButtonCard(
                 title: 'Exampe',
-                action: () {},
+                action: () => Navigator.of(context).pushNamed('/bloc/example/'),
               ),
               ButtonCard(
                 title: 'Exampe Freezed',
