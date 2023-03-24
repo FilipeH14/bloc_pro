@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc_pro/features/bloc_exemple/bloc/example_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,22 +11,47 @@ class BlocExemple extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Bloc_exemple')),
-      body: BlocBuilder<ExampleBloc, ExampleState>(
-        builder: (context, state) {
+      body: BlocListener<ExampleBloc, ExampleState>(
+        listener: (context, state) {
           if (state is ExampleStateData) {
-            return ListView.builder(
-              itemCount: state.names.length,
-              itemBuilder: (context, index) {
-                final name = state.names[index];
-                return ListTile(
-                  title: Text(name),
-                );
-              },
-            );
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('A quantidade de nomes é ${state.names.length}'),
+            ));
           }
-
-          return const Text('Nenhum nome cadastrado');
         },
+        child: Column(
+          children: [
+            BlocConsumer<ExampleBloc, ExampleState>(
+              listener: (context, state) =>
+                  log('Estado alterado para ${state.runtimeType}'),
+              builder: (_, state) {
+                if (state is ExampleStateData) {
+                  return Text('Total de nomes é: ${state.names.length}');
+                }
+
+                return const SizedBox.shrink();
+              },
+            ),
+            BlocBuilder<ExampleBloc, ExampleState>(
+              builder: (context, state) {
+                if (state is ExampleStateData) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.names.length,
+                    itemBuilder: (context, index) {
+                      final name = state.names[index];
+                      return ListTile(
+                        title: Text(name),
+                      );
+                    },
+                  );
+                }
+
+                return const Text('Nenhum nome cadastrado');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
