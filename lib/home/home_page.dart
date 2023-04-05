@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
               ),
               ButtonCard(
                 title: 'Exampe Freezed',
-                action: () {},
+                action: () => Navigator.of(context).pushNamed('/bloc/example/freezed'),
               ),
               ButtonCard(
                 title: 'Contact',

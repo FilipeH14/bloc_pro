@@ -1,5 +1,6 @@
 import 'package:bloc_pro/features/bloc_exemple/bloc/example_bloc.dart';
 import 'package:bloc_pro/features/bloc_exemple/bloc_example.dart';
+import 'package:bloc_pro/features/bloc_exemple/bloc_freezed_example.dart';
 import 'package:bloc_pro/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
               create: (_) => ExampleBloc()..add(ExampleFindNameEvent()),
               child: const BlocExemple(),
             ),
+        '/bloc/example/freezed': (context) => const BlocFreezedExample(),
       },
     );
   }
