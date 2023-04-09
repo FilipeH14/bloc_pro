@@ -2,8 +2,11 @@ import 'package:bloc_pro/models/contact_model.dart';
 import 'package:dio/dio.dart';
 
 class ContactRepository {
+
+  final usersPath = 'http://192.168.1.8:8080/users';
+
   Future<List<ContactModel>> findAll() async {
-    final response = await Dio().get('http://10.0.2.2:3031/users');
+    final response = await Dio().get(usersPath);
 
     return response.data
         ?.map<ContactModel>((contact) => ContactModel.fromMap(contact))
@@ -11,11 +14,11 @@ class ContactRepository {
   }
 
   Future<void> create(ContactModel model) =>
-      Dio().post('http://10.0.2.2:3031/users', data: model.toMap());
+      Dio().post(usersPath, data: model.toMap());
 
   Future<void> update(ContactModel model) =>
-      Dio().put('http://10.0.2.2:3031/users/${model.id}', data: model.toMap());
+      Dio().put('$usersPath/${model.id}', data: model.toMap());
 
   Future<void> delete(ContactModel model) =>
-      Dio().delete('http://10.0.2.2:3031/users/${model.id}');
+      Dio().delete('$usersPath/${model.id}');
 }
