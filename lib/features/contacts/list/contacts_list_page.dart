@@ -1,5 +1,6 @@
 import 'package:bloc_pro/features/contacts/list/bloc/contact_list_bloc.dart';
 import 'package:bloc_pro/models/contact_model.dart';
+import 'package:bloc_pro/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
@@ -32,6 +33,12 @@ class ContactsListPage extends StatelessWidget {
             SliverFillRemaining(
               child: Column(
                 children: [
+                  Loader<ContactListBloc, ContactsListState>(selector: (state) {
+                    return state.maybeWhen(
+                      loading: () => true,
+                      orElse: () => false,
+                    );
+                  }),
                   BlocSelector<ContactListBloc, ContactsListState,
                       List<ContactModel>>(
                     selector: (state) {
