@@ -3,6 +3,8 @@ import 'package:bloc_pro/features/bloc_exemple/bloc_example.dart';
 import 'package:bloc_pro/features/bloc_exemple/bloc_freezed_example.dart';
 import 'package:bloc_pro/features/contacts/list/bloc/contact_list_bloc.dart';
 import 'package:bloc_pro/features/contacts/list/contacts_list_page.dart';
+import 'package:bloc_pro/features/contacts/register/contact_register_page.dart';
+import 'package:bloc_pro/features/contacts/update/contact_update_page.dart';
 import 'package:bloc_pro/home/home_page.dart';
 import 'package:bloc_pro/repositories/contact_repository.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
                   ..add(const ContactsListEvent.findAll()),
                 child: const ContactsListPage(),
               ),
+          'contacts/register': (context) => const ContactRegisterPage(),
+          'contacts/update': (context) => const ContactUpdatePage(),
         },
       ),
     );
